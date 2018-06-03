@@ -1,16 +1,16 @@
-# EamUnityEditorTool__LuaPreview
-EamUnityEditorTool--LuaPreview&lt;Unity编辑器工具--文本文件预览>
+# LuaPreview  --EamUnityEditorTool
+*EamUnityEditorTool--LuaPreview&lt;Unity编辑器工具--文本文件预览>*
 
-CSDN博客地址:[点击这里](https://blog.csdn.net/qq_33337811/article/details/77099001)
+*CSDN博客地址:[点击这里](https://blog.csdn.net/qq_33337811/article/details/77099001)*
 
-击Project里一个C#脚本，在Inspector面板就会出现脚本内容的预览，但是项目中的lua文件点击了却不会这样显示。
+点击Project里一个C#脚本，在Inspector面板就会出现脚本内容的预览，但是项目中的lua文件点击了却不会这样显示。
 
 所以，我们点击资源时，更具资源的后缀名来选择显示在Inspector面板的内容，例如，lua文件点击了可以直接把文本内容显示在Inspector面板。
 
 效果：(点击的是lua文件，为了保密，内容替换为一组任意文字)
 ![](https://i.imgur.com/5bkutB5.png)
 
-代码：
+**代码：**
 
 因为资源文件可能有很多种后缀名，不同的可能需求也不一样，所以我们写个属性类，不同需求的使用不同的属性：
 
@@ -27,11 +27,11 @@ CSDN博客地址:[点击这里](https://blog.csdn.net/qq_33337811/article/detail
 然后以lua文件这种文本资源为例，面板绘制：
 
     /// <summary>
-/// lua文件绘制方式
-/// </summary>
-[CustomAsset(".lua")]  //绘制方式绑定以.lua为后缀的资源文件
-public class LuaInspector : Editor
-{
+	/// lua文件绘制方式
+	/// </summary>
+	[CustomAsset(".lua")]  //绘制方式绑定以.lua为后缀的资源文件
+	public class LuaInspector : Editor
+	{
     private string content;
     private bool show = false;
     private string showKey = "LuaInspectorShown";
@@ -67,9 +67,9 @@ public class LuaInspector : Editor
 目前可见这两个文件关联性不大，第二个脚本设置了绘制方式，但是还没法使以.lua后缀的文件就以这种方式绘制了，于是有了：
 
     [CustomEditor(typeof(DefaultAsset))] //自定义--资源的Inspector绘制方式
-public class DefaultAssetInspector : Editor
-{
-    private Editor editor; //资源文件预览绘制方式
+	public class DefaultAssetInspector : Editor
+	{
+	    private Editor editor; //资源文件预览绘制方式
     private static Type[] customAssetTypes;
 
     [InitializeOnLoadMethod] //Unity软件启动事件
